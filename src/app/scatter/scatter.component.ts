@@ -59,18 +59,18 @@ private drawPlot(): void {
   .append("circle")
   .attr("cx", (d: any) => x(d.Released))
   .attr("cy", (d: any) => y(d.Stars))
-  .attr("r", 7)
-  .style("opacity", .5)
-  .style("fill", "#69b3a2");
+  .attr("r", 6)
+  .style("opacity", .9)
+  .style("fill", "#cc2b5e");
 
   // Add labels
   dots.selectAll("text")
   .data(this.data)
   .enter()
   .append("text")
+  .style("fill", "#E9E4F0")
   .text((d: any) => d.Framework)
   .attr("x", (d: any) => x(d.Released))
-  .attr("y", (d: any) => y(d.Stars))
-}
-
+  .attr("y", (d: any) => y(d.Stars));
+  }
 }
