@@ -49,7 +49,7 @@ export class PieComponent implements OnInit {
   private createColors(): void {
     this.colors = d3.scaleOrdinal()
     .domain(this.data.map(d => d.Stars.toString()))
-    .range(["#fc00ff", "#00dbde", "#ec2F4B", "#009FFF", "#89216B"]);
+    .range(["#c31432", "#240b36", "#F00000", "#ec008c", "#061161"]);
   }
 
   private drawChart(): void {
@@ -80,6 +80,7 @@ export class PieComponent implements OnInit {
     .data(pie(this.data))
     .enter()
     .append('text')
+    .style("fill", "#E9E4F0")
     .text((d: any) => d.data.Framework)
     .attr("transform", (d: any) => "translate(" + labelLocation.centroid(d) + ")")
     .style("text-anchor", "middle")
