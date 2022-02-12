@@ -9,13 +9,6 @@ import * as d3 from 'd3';
 
 export class BarComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
-    this.createSvg();
-    this.drawBars(this.data);
-  }
-
   // dummy data 
   private data = [
     {"Framework": "Vue", "Stars": "166443", "Released": "2014"},
@@ -25,10 +18,15 @@ export class BarComponent implements OnInit {
     {"Framework": "Ember", "Stars": "21471", "Released": "2011"},
   ];
 
-   private svg;
+   private svg: d3.Selection<SVGGElement, unknown, HTMLElement, any> | undefined;
    private margin = 50;
    private width = 750 - (this.margin * 2);
    private height = 400 - (this.margin * 2);
+
+   ngOnInit(): void {
+    this.createSvg();
+    this.drawBars(this.data);
+  }
 
    // method create svg
    private createSvg() : void {
@@ -70,10 +68,10 @@ export class BarComponent implements OnInit {
     .data(data)
     .enter()
     .append("rect")
-    .attr("x", d => x(d.Framework))
-    .attr("y", d => y(d.Stars))
+    .attr("x", (d: { Framework: string; })  => x(d.Framework))
+    .attr("y", (d: { Stars: d3.NumberValue; }) => y(d.Stars))
     .attr("width", x.bandwidth())
-    .attr("height", (d) => this.height - y(d.Stars))
+    .attr("height", (d: { Stars: d3.NumberValue; }) => this.height - y(d.Stars))
     .attr("fill", "#d04a35");
   }
 }
