@@ -25,11 +25,14 @@ export class BarComponent implements OnInit {
 
    ngOnInit(): void {
     this.createSvg();
+    this.drawBars(this.data);
     // parse data from a CSV 
-    d3.csv("/assets/frameworks.csv").then(data => this.drawBars(data));
-    // this.drawBars(this.data);
-  }
-
+    // d3.csv("/assets/frameworks.csv").then(data => this.drawBars(data));
+    
+    // fetch data from JSON endpoint --> jsonbin.io
+    // d3.json('https://api.jsonbin.io/b/5eee6a5397cb753b4d149343').then(data => this.drawBars(data as any));
+    }
+  
    // method create svg
    private createSvg() : void {
      this.svg = d3.select("figure#bar")
@@ -74,6 +77,6 @@ export class BarComponent implements OnInit {
     .attr("y", (d: any) => y(d.Stars))
     .attr("width", x.bandwidth())
     .attr("height", (d: any) => this.height - y(d.Stars))
-    .attr("fill", "#fc4a1a");
+    .attr("fill", "#fc4a1a")
   }
 }
